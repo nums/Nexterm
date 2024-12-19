@@ -36,11 +36,13 @@ const XtermRenderer = ({ session, disconnectFromServer, pve }) => {
         let url;
         let ws;
 
+        console.log(import.meta.env)
+        
         if (pve) {
-            url = process.env.NODE_ENV === "production" ? `${window.location.host}/api/servers/pve-lxc` : "localhost:6989/api/servers/pve-lxc";
+            url = process.env.NODE_ENV === "production" ? `${window.location.host}/api/servers/pve-lxc` : `${import.meta.env.VITE_WS_DOMAIN}:${import.meta.env.VITE_WS_PORT}/api/servers/pve-lxc`;
             ws = new WebSocket(`${protocol}://${url}?sessionToken=${sessionToken}&serverId=${session.server}&containerId=${session.containerId}`);
         } else {
-            url = process.env.NODE_ENV === "production" ? `${window.location.host}/api/servers/sshd` : "localhost:6989/api/servers/sshd";
+            url = process.env.NODE_ENV === "production" ? `${window.location.host}/api/servers/sshd` : `${import.meta.env.VITE_WS_DOMAIN}:${import.meta.env.VITE_WS_PORT}/api/servers/sshd`;
             ws = new WebSocket(`${protocol}://${url}?sessionToken=${sessionToken}&serverId=${session.server}&identityId=${session.identity}`);
         }
 

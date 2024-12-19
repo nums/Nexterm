@@ -26,7 +26,7 @@
   },
   "scripts": {
     "dev:server": "nodemon server/index.js",
-    "dev:client": "cd client && yarn run dev",
+    "dev:client": "cd client && yarn run dev --host 0.0.0.0",
     "dev": "concurrently --kill-others-on-fail \"yarn dev:server\" \"yarn dev:client\"",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",

@@ -26,7 +26,7 @@ export const FileRenderer = ({ session, disconnectFromServer }) => {
     const dropZoneRef = useRef(null);
 
     const protocol = location.protocol === "https:" ? "wss" : "ws";
-    const path = process.env.NODE_ENV === "production" ? `${window.location.host}/api/servers/sftp` : "localhost:6989/api/servers/sftp";
+    const path = process.env.NODE_ENV === "production" ? `${window.location.host}/api/servers/sftp` : `${import.meta.env.VITE_WS_DOMAIN}:${import.meta.env.VITE_WS_PORT}/api/servers/sftp`;
     const url = `${protocol}://${path}?sessionToken=${sessionToken}&serverId=${session.server}&identityId=${session.identity}`;
 
     const downloadFile = (path) => {

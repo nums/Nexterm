@@ -44,7 +44,7 @@ export const AppInstaller = ({ serverId, app, setInstalling }) => {
     const installApp = () => {
         const protocol = location.protocol === "https:" ? "wss" : "ws";
 
-        const url = process.env.NODE_ENV === "production" ? `${window.location.host}/api/apps/installer` : "localhost:6989/api/apps/installer";
+        const url = process.env.NODE_ENV === "production" ? `${window.location.host}/api/apps/installer` : `${import.meta.env.VITE_WS_DOMAIN}:${import.meta.env.VITE_WS_PORT}/api/apps/installer`;
         const ws = new WebSocket(`${protocol}://${url}?sessionToken=${sessionToken}&serverId=${serverId}&appId=${app?.id}`);
 
         ws.onmessage = (event) => {

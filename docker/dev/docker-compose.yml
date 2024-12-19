@@ -1,0 +1,16 @@
+version: "3"
+services:
+  nexterm-dev:
+    image: nexterm-dev
+    build:
+        context: ./
+        dockerfile: Dockerfile        
+    container_name: nexterm-dev
+    env_file: .env
+    volumes:
+        - '../../:/app/src'     
+    environment:
+        - NODE_ENV=development 
+    ports:
+        - '${SERVER_PORT:-6989}:${SERVER_PORT:-6989}'
+        - '5173:5173'

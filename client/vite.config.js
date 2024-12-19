@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import * as path from "path";
 
@@ -18,7 +18,7 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            "/api": "http://localhost:6989",
+            "/api": process.env.NODE_ENV == 'production' ? "http://localhost:6989" : `http://${process.env.SERVER_DOMAIN}:${process.env.SERVER_PORT}`
         }
     }
 });

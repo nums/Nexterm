@@ -77,7 +77,7 @@ const GuacamoleRenderer = ({ session, disconnectFromServer, pve }) => {
         const urlSuffix = pve ? "pve-qemu" : "guacd";
 
         const tunnel = new Guacamole.WebSocketTunnel((process.env.NODE_ENV === "production" ? "/api/servers/"
-                : "ws://localhost:6989/api/servers/") + urlSuffix);
+                : `ws://${import.meta.env.VITE_WS_DOMAIN}:${import.meta.env.VITE_WS_PORT}/api/servers/`) + urlSuffix);
         const client = new Guacamole.Client(tunnel);
 
         clientRef.current = client;
